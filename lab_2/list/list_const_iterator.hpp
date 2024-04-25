@@ -22,7 +22,7 @@ ListConstIterator<T>::ListConstIterator(const ListConstIterator<T> &iterator)
 template <typename T>
 ListConstIterator<T>::ListConstIterator(const List<T> &list)
 {
-    this->ptr = list.cbegin().ptr.lock();
+    this->ptr = list.get_head();
 };
 
 template <typename T>

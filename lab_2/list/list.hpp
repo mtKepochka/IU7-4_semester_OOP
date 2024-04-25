@@ -10,13 +10,42 @@ List<T>::List() noexcept
 };
 
 template <Comparable T>
+ListIterator<T> List<T>::get_by_value(const T& data)
+{
+    ListIterator<T> begin_iterator = this->begin();
+    ListIterator<T> end_iterator = this->end();
+    ListIterator<T> current = begin_iterator;
+    for (; current != end_iterator && current->get() != data; current++)
+        ;
+    return current;
+}
+
+template <Comparable T>
+List<T>::List(const ListNode<T> &node)
+{
+    this->container_size = 0;
+    this->head = nullptr;
+    this->tail = nullptr;
+    this->push_back(node.get());
+}
+
+template <Comparable T>
+List<T>::List(const std::shared_ptr<ListNode<T>> &node)
+{
+    this->container_size = 0;
+    this->head = nullptr;
+    this->tail = nullptr;
+    this->push_back(node);
+}
+
+template <Comparable T>
 List<T>::List(const List<T> &list)
 {
     this->container_size = 0;
     this->head = nullptr;
     this->tail = nullptr;
 
-    for (auto node : list)
+    for (const auto &node : list)
         this->push_back(node);
 };
 
@@ -29,7 +58,7 @@ List<T>::List(List<T> &&list)
 };
 
 template <Comparable T>
-List<T>::List(T *const arr, const int &size)
+List<T>::List(T *const arr, int size)
 {
     if (!arr)
     {
@@ -58,7 +87,7 @@ List<T>::List(const std::initializer_list<T> &nodes)
     this->head = nullptr;
     this->tail = nullptr;
 
-    for (auto node : nodes)
+    for (const auto &node : nodes)
         this->push_back(node);
 };
 
@@ -511,6 +540,23 @@ bool List<T>::operator!=(const List<T> &list) const
     return this->container_size != list.container_size;
 };
 
+template <Comparable T>
+template <NumType U>
+List<U> List<T>::operator*(const U &data)
+{
+    if (!(std::is_signed<T>::value || std::is_unsigned<T>::value || std::is_floating_point<T>::value || std::same_as<T, char> || std::same_as<T, double>))
+    {
+        time_t cur_time = time(NULL);
+        throw InvalidUsage(ctime(&cur_time), __FILE__, typeid(*this).name(), __LINE__);
+    }
+
+    ListIterator<U> begin_iterator = this->begin();
+    ListIterator<U> end_iterator = this->end();
+    for (ListIterator<U> current = begin_iterator; current != end_iterator; current++)
+        current->set(data * current->get());
+    return *this;
+}
+
 // template <Comparable T>
 // bool List<T>::operator<(const List<T> &list) const
 // {
@@ -625,6 +671,18 @@ std::shared_ptr<ListNode<T>> List<T>::get_head()
 
 template <Comparable T>
 std::shared_ptr<ListNode<T>> List<T>::get_tail()
+{
+    return this->tail;
+};
+
+template <Comparable T>
+const std::shared_ptr<ListNode<T>> List<T>::get_head() const
+{
+    return this->head;
+};
+
+template <Comparable T>
+const std::shared_ptr<ListNode<T>> List<T>::get_tail() const
 {
     return this->tail;
 };

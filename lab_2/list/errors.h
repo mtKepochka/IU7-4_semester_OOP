@@ -62,6 +62,17 @@ public:
         BaseError(time, filename, classname, line, info){};
 };
 
+class InvalidUsage : public BaseError
+{
+public:
+    InvalidUsage(const std::string &time,
+              const std::string &filename,
+              const std::string &classname,
+              const int line,
+              std::string info = "Incorrect usage of list!\n"): 
+        BaseError(time, filename, classname, line, info){};
+};
+
 class InvalidPointer : public BaseError
 {
 public:

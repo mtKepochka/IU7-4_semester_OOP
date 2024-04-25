@@ -22,7 +22,10 @@ public:
     List() noexcept;
     List(const List<T> &list);
     List(List<T> &&list);
-    List(T *const arr, const int &size);
+    List(T *const arr, int size);
+    //конструктор от 1 узла
+    List(const ListNode<T> &node);
+    List(const std::shared_ptr<ListNode<T>> &node);
     List(const std::initializer_list<T> &nodes);
     List(const ListIterator<T> &begin, const ListIterator<T> &end);
     List(const ListConstIterator<T> &begin, const ListConstIterator<T> &end);
@@ -32,6 +35,9 @@ public:
     virtual bool empty() const noexcept override;
     virtual int size() const noexcept override;
     virtual void clear() override;
+
+    ListIterator<T> get_by_value(const T& data);
+    //ListIterator<T> operator[]();
 
     ListIterator<T> push_front(const T& data);
     ListIterator<T> push_front(const List<T> &list);
@@ -65,6 +71,7 @@ public:
     bool operator==(const List<T> &list) const;
     bool operator!=(const List<T> &list) const;
 
+
     auto operator<=>(const List<T> &other) const;
     // bool operator<(const List<T> &list) const;
     // bool operator<=(const List<T> &list) const;
@@ -80,10 +87,16 @@ public:
 
     ListConstIterator<T> cbegin() const noexcept;
     ListConstIterator<T> cend() const noexcept;
-    
-protected:
+
+    template <NumType U>
+    List<U> operator*(const U &data);
+
     std::shared_ptr<ListNode<T>> get_head();
     std::shared_ptr<ListNode<T>> get_tail();
+    const std::shared_ptr<ListNode<T>> get_head() const;
+    const std::shared_ptr<ListNode<T>> get_tail() const;
+
+protected:
     ListIterator<T> push_back(const std::shared_ptr<ListNode<T>> &node);
     ListIterator<T> push_front(const std::shared_ptr<ListNode<T>> &node);
 

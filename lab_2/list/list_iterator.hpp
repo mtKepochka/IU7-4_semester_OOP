@@ -22,7 +22,7 @@ ListIterator<T>::ListIterator(const ListIterator<T> &iterator)
 template <typename T>
 ListIterator<T>::ListIterator(List<T> &list)
 {
-    this->ptr = list.begin().ptr.lock();
+    this->ptr = list.get_head();
 };
 
 template <typename T>

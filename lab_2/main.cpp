@@ -7,6 +7,14 @@ using namespace std;
 
 int main()
 {
+    List<int> list_test_tmp;
+    list_test_tmp.push_back(1);
+    list_test_tmp.push_back(2);
+    list_test_tmp.push_back(3);
+    list_test_tmp.push_back(4);
+    list_test_tmp = list_test_tmp * 3;
+    cout << list_test_tmp << endl;
+
     cout << "List 1\n";
     List<string> list1;
     list1.push_back("First");
@@ -23,6 +31,12 @@ int main()
     string arr[] = { "Hello", "World", "!" };
     List<string> list3(arr, 3);
     cout << list3 << endl;
+
+    cout << "Move construct" << endl;
+    List<string> tmp_very_tmp(arr, 3);
+    cout << tmp_very_tmp << endl;
+    List<string> list_move_1(move(tmp_very_tmp));
+    cout << list_move_1 << endl;
 
     cout << "List 4\n";
     List<string> list4 = { "That's", "not", "my", "first", "programm."};
