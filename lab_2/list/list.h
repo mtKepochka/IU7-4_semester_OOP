@@ -20,7 +20,7 @@ class List: public BaseContainer
 {
 public:
     List() noexcept;
-    explicit List(const List<T> &list);
+    List(const List<T> &list);
     List(List<T> &&list);
     List(T *const arr, const int &size);
     List(const std::initializer_list<T> &nodes);
