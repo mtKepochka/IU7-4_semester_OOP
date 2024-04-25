@@ -65,13 +65,12 @@ public:
     bool operator==(const List<T> &list) const;
     bool operator!=(const List<T> &list) const;
 
+    auto operator<=>(const List<T> &other) const;
     // bool operator<(const List<T> &list) const;
     // bool operator<=(const List<T> &list) const;
 
     // bool operator>(const List<T> &list) const;
     // bool operator>=(const List<T> &list) const;
-
-    auto operator<=>(const List<T> &other) const;
 
     ListIterator<T> begin() noexcept;
     ListIterator<T> end() noexcept;
