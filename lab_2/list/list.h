@@ -106,7 +106,7 @@ std::ostream &operator<<(std::ostream &os, List<T> &list)
             os << *iter;
 
     return os;
-}
+};
 
 template <typename T>
 std::ostream &operator<<(std::ostream &os, const List<T> &list)
@@ -119,6 +119,6 @@ std::ostream &operator<<(std::ostream &os, const List<T> &list)
             os << *iter;
 
     return os;
-}
+};
 
 #endif

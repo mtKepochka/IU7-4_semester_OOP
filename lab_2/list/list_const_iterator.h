@@ -19,8 +19,8 @@ template <typename T>
 class ListConstIterator : public BaseIterator
 {
 public:
-    ListConstIterator();
-    ListConstIterator(const std::shared_ptr<ListNode<T>> &node);
+    ListConstIterator() noexcept;
+    ListConstIterator(const std::shared_ptr<ListNode<T>> &node) noexcept;
     ListConstIterator(const ListConstIterator<T> &iterator);
     ListConstIterator(const List<T> &list);
 
@@ -32,7 +32,7 @@ public:
     const std::shared_ptr<ListNode<T>> operator->() const;
     const T &operator*() const;
 
-    operator bool() const;
+    operator bool() const noexcept;
 
     ListConstIterator<T> &operator+=(const int &size);
     ListConstIterator<T> operator+(const int &size) const;

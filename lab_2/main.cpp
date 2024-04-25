@@ -1,119 +1,139 @@
 #include <iostream>
+#include <string>
 
 #include "./list/list.h"
 
+using namespace std;
+
 int main()
 {
-    std::cout << "List 1\n";
-    List<int> list1;
-    list1.push_back(1);
-    list1.push_back(2);
-    list1.push_back(3);
-    list1.push_back(4);
-    std::cout << list1 << std::endl;
+    cout << "List 1\n";
+    List<string> list1;
+    list1.push_back("First");
+    list1.push_back("Second");
+    list1.push_back("Third");
+    list1.push_back("Fourth");
+    cout << list1 << endl;
 
-    std::cout << "List 2\n";
-    List<int> list2(list1);
-    std::cout << list2 << std::endl;
+    cout << "List 2\n";
+    List<string> list2(list1);
+    cout << list2 << endl;
 
-    std::cout << "List 3\n";
-    int arr[] = {3, 2, 1};
-    List<int> list3(arr, 3);
-    std::cout << list3 << std::endl;
+    cout << "List 3\n";
+    string arr[] = { "Hello", "World", "!" };
+    List<string> list3(arr, 3);
+    cout << list3 << endl;
 
-    std::cout << "List 4\n";
-    List<int> list4 = {6, 7, 8, 9, 10, 11};
-    std::cout << list4 << std::endl;
+    cout << "List 4\n";
+    List<string> list4 = { "That's", "not", "my", "first", "programm."};
+    cout << list4 << endl;
 
-    std::cout << "List 5\n";
-    auto first = list4.begin();
-    auto end = list4.begin() + 2;
+    cout << "List 5\n";
+    ListIterator<string> first = list4.begin();
+    ListIterator<string> end = list4.begin() + 2;
 
-    List<int> list5(first, end);
-    std::cout << list5 << std::endl;
+    List<string> list5(first, end);
+    cout << list5 << endl;
 
-    std::cout << "List 6\n";
-    auto first_2 = list4.cbegin() + 1;
-    auto end_2 = list4.cbegin() + 2;
+    cout << "List 6\n";
+    ListConstIterator<string> first_2 = list4.cbegin() + 1;
+    ListConstIterator<string> end_2 = list4.cbegin() + 2;
 
-    List<int> list6(first_2, end_2);
-    std::cout << list6 << std::endl;
+    List<string> list6(first_2, end_2);
+    cout << list6 << endl;
 
-    std::cout << "\nTry create list with negative size:\n";
+    cout << "\nTry create list with negative size:\n";
     try
     {
-        List<int> list_tmp_1(arr, -1);
+        List<string> list_tmp_1(arr, -1);
     }
     catch (InvalidSize &error)
     {
-        std::cout << error.what();
+        cout << error.what();
     }
 
-    std::cout << "\n------------------\n";
-    std::cout << "Test methods\n";
+    cout << "\nTry create list with bad array:\n";
+    try
+    {
+        List<string> list_tmp_2(nullptr, 3);
+    }
+    catch (InvalidPointer &error)
+    {
+        cout << error.what();
+    }
 
-    std::cout << "Is empty (list6): " << list6.empty() << std::endl;
-
-    std::cout << "After clear method: ";
+    cout << "\n------------------\n";
+    cout << "Test methods\n";
+    cout << "Is empty (list6): " << list6.empty() << endl;
+    cout << "After clear method: ";
     list6.clear();
-    std::cout << "Is empty (list6): " << list6.empty() << std::endl;
+    cout << "Is empty (list6): " << list6.empty() << endl;
 
-    std::cout << "\nPush front element\n";
-    list6.push_front(100);
-    std::cout << list6 << std::endl;
-    std::cout << "Push front List 1\n";
+    cout << "\nPush front element\n";
+    list6.push_front("front");
+    cout << list6 << endl;
+
+    cout << "Push front List 1\n";
     list6.push_front(list1);
-    std::cout << list6 << std::endl;
+    cout << list6 << endl;
 
-    std::cout << "\nPush back element\n";
-    list6.push_back(1000);
-    std::cout << list6 << std::endl;
-    std::cout << "Push back List 1\n";
+    cout << "\nPush back element\n";
+    list6.push_back("back");
+    cout << list6 << endl;
+
+    cout << "Push back List 1\n";
     list6.push_back(list1);
-    std::cout << list6 << std::endl;
+    cout << list6 << endl;
 
-    std::cout << "\nInsert in head\n";
-    list6.insert(list6.begin(), 999);
-    std::cout << list6 << std::endl;
-    std::cout << "Insert in 3d pos\n";
-    list6.insert(list6.begin() + 3, 999);
-    std::cout << list6 << std::endl;
-    std::cout << "Insert in 3d pos List 1\n";
+    cout << "\nInsert in head\n";
+    list6.insert(list6.begin(), "AAAAAAAA");
+    cout << list6 << endl;
+
+    cout << "Insert in 3d pos\n";
+    list6.insert(list6.begin() + 3, "AAAAA");
+    cout << list6 << endl;
+
+    cout << "Insert in 3d pos List 1\n";
     list6.insert(list6.begin() + 3, list1);
-    std::cout << list6 << std::endl;
+    cout << list6 << endl;
 
-    std::cout << "\nInsert const in head\n";
-    list5.insert(list5.cbegin(), 777);
-    std::cout << list5 << std::endl;
-    std::cout << "Insert const in 3d pos\n";
-    list5.insert(list5.cbegin() + 3, 555);
-    std::cout << list5 << std::endl;
-    std::cout << "Insert const in 3d List 1\n";
+    cout << "\nInsert const in head\n";
+    list5.insert(list5.cbegin(), "meow");
+    cout << list5 << endl;
+
+    cout << "Insert const in 3d pos\n";
+    list5.insert(list5.cbegin() + 3, "meow-meow");
+    cout << list5 << endl;
+
+    cout << "Insert const in 3d List 1\n";
     list5.insert(list5.cbegin() + 3, list1);
-    std::cout << list5 << std::endl;
+    cout << list5 << endl;
 
-    std::cout << "\nPop front\n";
-    std::cout << "Before:\n";
-    std::cout << list6 << std::endl;
+    cout << "\nPop front\n";
+    cout << "Before:\n";
+    cout << list6 << endl;
+
     list6.pop_front();
-    std::cout << "After:\n";
-    std::cout << list6 << std::endl;
+    cout << "After:\n";
+    cout << list6 << endl;
 
-    std::cout << "\nPop back\n";
-    std::cout << "Before:\n";
-    std::cout << list6 << std::endl;
+    cout << "\nPop back\n";
+    cout << "Before:\n";
+    cout << list6 << endl;
+
     list6.pop_back();
-    std::cout << "After:\n";
-    std::cout << list6 << std::endl;
+    cout << "After:\n";
+    cout << list6 << endl;
 
-    std::cout << "\nErase second element\n";
-    std::cout << "Before:\n";
-    std::cout << list6 << std::endl;
+    cout << "\nErase second element\n";
+    cout << "Before:\n";
+    cout << list6 << endl;
+
     list6.erase(list6.begin() + 1);
-    std::cout << "After:\n";
-    std::cout << list6 << std::endl;
+    cout << "After:\n";
+    cout << list6 << endl;
 
-    std::cout << "\nTry pop from empty list:\n";
+    cout << "\nTry pop from empty list:\n";
     list6.clear();
     try
     {
@@ -121,123 +141,119 @@ int main()
     }
     catch (EmptyList &error)
     {
-        std::cout << error.what();
+        cout << error.what();
     }
 
-    std::cout << "\nReverse\n";
-    std::cout << "Before:\n";
-    std::cout << list2 << std::endl;
+    cout << "\nReverse\n";
+    cout << "Before:\n";
+    cout << list2 << endl;
     list2.reverse();
-    std::cout << "After:\n";
-    std::cout << list2 << std::endl;
+    cout << "After:\n";
+    cout << list2 << endl;
 
-    std::cout << "\nMerge\n";
+    cout << "\nMerge\n";
     list2.merge(list1);
-    list2.merge(1999);
-    std::cout << list2 << std::endl;
+    list2.merge("merged");
+    cout << list2 << endl;
 
-    std::cout << "\nTest operators\n";
-    List<int> list_t_1 = {1, 2, 3, 4};
-    List<int> list_t_2 = {5, 6};
+    cout << "\nTest operators\n";
+    List<string> list_t_1 = { "1", "2", "3", "4" };
+    List<string> list_t_2 = { "5", "6" };
 
-    std::cout << "First list:\n";
-    std::cout << list_t_1 << std::endl;
-    std::cout << "Second list:\n";
-    std::cout << list_t_2 << std::endl;
+    cout << "First list:\n";
+    cout << list_t_1 << endl;
+    cout << "Second list:\n";
+    cout << list_t_2 << endl;
 
-    std::cout << "\noperator =: ";
+    cout << "\noperator =: ";
     list_t_1 = list_t_2;
-    std::cout << list_t_1 << std::endl;
+    cout << list_t_1 << endl;
 
-    std::cout << "\noperator += : ";
+    cout << "\noperator += : ";
     list_t_1 += list_t_2;
-    list_t_1 += 10;
-    std::cout << list_t_1 << std::endl;
+    list_t_1 += "10";
+    cout << list_t_1 << endl;
 
-    std::cout << "\noperator +: ";
+    cout << "\noperator +: ";
     list_t_1 = list1 + list_t_2;
-    list_t_1 += 100;
-    std::cout << list_t_1 << std::endl;
+    list_t_1 += "100";
+    cout << list_t_1 << endl;
 
-    std::cout << "\nTest cmp operators\n";
-    List<int> list_cmp_1 = {1, 2, 3, 4};
-    List<int> list_cmp_2 = {1, 2, 3, 4};
+    cout << "\nTest cmp operators\n";
+    List<string> list_cmp_1 = { "1", "2", "3", "4" };
+    List<string> list_cmp_2 = { "1", "2", "3", "4" };
 
-    std::cout << "\noperator ==: ";
+    cout << "\noperator ==: ";
     if (list_cmp_1 == list_cmp_2)
-        std::cout << "Equal\n";
+        cout << "Equal\n";
     else
-        std::cout << "Not Equal\n";
+        cout << "Not Equal\n";
 
     list_cmp_1.pop_back();
 
-    std::cout << "\noperator !=: ";
+    cout << "\noperator !=: ";
     if (list_cmp_1 != list_cmp_1)
-        std::cout << "Not Equal\n";
+        cout << "Not Equal\n";
     else
-        std::cout << "Equal\n";
+        cout << "Equal\n";
 
-    list_cmp_1.push_back(5);
-    std::cout << "\nlist_cmp_1: " << list_cmp_1 << std::endl;
-    std::cout << "list_cmp_2: " << list_cmp_2 << std::endl;
+    list_cmp_1.push_back("5");
+    cout << "\nlist_cmp_1: " << list_cmp_1 << endl;
+    cout << "list_cmp_2: " << list_cmp_2 << endl;
 
-    std::cout << "\noperator < (list_cmp_1 < list_cmp_2): ";
+    cout << "\noperator < (list_cmp_1 < list_cmp_2): ";
     if (list_cmp_1 < list_cmp_2)
-        std::cout << "True\n";
+        cout << "True\n";
     else
-        std::cout << "False\n";
+        cout << "False\n";
 
-    std::cout << "\noperator <= (list_cmp_1 <= list_cmp_2): ";
+    cout << "\noperator <= (list_cmp_1 <= list_cmp_2): ";
     if (list_cmp_1 <= list_cmp_2)
-        std::cout << "True\n";
+        cout << "True\n";
     else
-        std::cout << "False\n";
+        cout << "False\n";
 
-    std::cout << "\noperator > (list_cmp_1 > list_cmp_2): ";
+    cout << "\noperator > (list_cmp_1 > list_cmp_2): ";
     if (list_cmp_1 > list_cmp_2)
-        std::cout << "True\n";
+        cout << "True\n";
     else
-        std::cout << "False\n";
+        cout << "False\n";
 
-    std::cout << "\noperator >= (list_cmp_1 >= list_cmp_2): ";
+    cout << "\noperator >= (list_cmp_1 >= list_cmp_2): ";
     if (list_cmp_1 >= list_cmp_2)
-        std::cout << "True\n";
+        cout << "True\n";
     else
-        std::cout << "False\n";
+        cout << "False\n";
 
-    std::cout << "\nTest iterators:\n";
-    List<int> test_list = {1, 2, 3};
+    cout << "\nTest iterators:\n";
+    List<string> test_list = { "1", "2", "3" };
 
-    std::cout << "Change second value by iterator:\n";
-    std::cout << "Before:\n";
-    std::cout << test_list << std::endl;
+    cout << "Change second value by iterator:\n";
+    cout << "Before:\n";
+    cout << test_list << endl;
 
-    auto iter = test_list.begin();
+    ListIterator<string> iter = test_list.begin();
     iter++;
-    *iter = 500;
-    std::cout << "After:\n";
-    std::cout << test_list << std::endl;
-    // This dont work, because by const iterator we can't change value
-    // auto const_iter = test_list.cbegin();
-    // const_iter++;
-    // *const_iter = 900;
-    auto iter_2 = test_list.begin();
+    *iter = "500";
+    cout << "After:\n";
+    cout << test_list << endl;
+    ListIterator<string> iter_2 = test_list.begin();
     ++iter_2;
 
-    std::cout << "\noperator ==: ";
+    cout << "\noperator ==: ";
     if (iter == iter_2)
-        std::cout << "Equal\n";
+        cout << "Equal\n";
     else
-        std::cout << "Not Equal\n";
+        cout << "Not Equal\n";
 
-    std::cout << "\noperator !=: ";
+    cout << "\noperator !=: ";
     if (iter != iter_2)
-        std::cout << "Not Equal\n";
+        cout << "Not Equal\n";
     else
-        std::cout << "Equal\n";
+        cout << "Equal\n";
 
-    std::cout << "\nTest bool in iterator: ";
-    std::cout << (bool)test_list.begin() << std::endl;
+    cout << "\nTest bool in iterator: ";
+    cout << (bool)test_list.begin() << endl;
 
     return 0;
 }

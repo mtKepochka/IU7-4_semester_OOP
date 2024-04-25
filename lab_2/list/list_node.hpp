@@ -2,27 +2,27 @@
 #define LIST_NODE_HPP
 
 template <typename T>
-ListNode<T>::ListNode()
+ListNode<T>::ListNode() noexcept
 {
     this->next = nullptr;
 };
 
 template <typename T>
-ListNode<T>::ListNode(const T &data)
+ListNode<T>::ListNode(const T &data) noexcept
 {
     this->data = data;
     this->next = nullptr;
 };
 
 template <typename T>
-ListNode<T>::ListNode(const std::shared_ptr<ListNode<T>> &node)
+ListNode<T>::ListNode(const std::shared_ptr<ListNode<T>> &node) noexcept
 {
     this->next = node->next;
     this->data = node->data;
 };
 
 template <typename T>
-void ListNode<T>::set(const T &data)
+void ListNode<T>::set(const T &data) noexcept
 {
     this->data = data;
 };
@@ -41,37 +41,37 @@ void ListNode<T>::set_next(const std::shared_ptr<ListNode<T>> &node)
 };
 
 template <typename T>
-void ListNode<T>::set_null()
+void ListNode<T>::set_null() noexcept
 {
     this->next = nullptr;
 };
 
 template <typename T>
-T &ListNode<T>::get()
+T &ListNode<T>::get() noexcept
 {
     return this->data;
 };
 
 template <typename T>
-const T &ListNode<T>::get() const
+const T &ListNode<T>::get() const noexcept
 {
     return this->data;
 };
 
 template <typename T>
-std::shared_ptr<ListNode<T>> ListNode<T>::get_next() const
+std::shared_ptr<ListNode<T>> ListNode<T>::get_next() const noexcept
 {
     return this->next;
 };
 
 template <typename T>
-bool ListNode<T>::operator==(const std::shared_ptr<ListNode<T>> &node) const
+bool ListNode<T>::operator==(const std::shared_ptr<ListNode<T>> &node) const noexcept
 {
     return this == node;
 };
 
 template <typename T>
-bool ListNode<T>::operator!=(const std::shared_ptr<ListNode<T>> &node) const
+bool ListNode<T>::operator!=(const std::shared_ptr<ListNode<T>> &node) const noexcept
 {
     return this != node;
 };

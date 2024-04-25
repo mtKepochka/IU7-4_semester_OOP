@@ -2,13 +2,13 @@
 #define LIST_ITERATOR_HPP
 
 template <typename T>
-ListIterator<T>::ListIterator()
+ListIterator<T>::ListIterator() noexcept
 {   
     this->ptr.lock() = nullptr;
 };
 
 template <typename T>
-ListIterator<T>::ListIterator(const std::shared_ptr<ListNode<T>> &node)
+ListIterator<T>::ListIterator(const std::shared_ptr<ListNode<T>> &node) noexcept
 {
     this->ptr = node;
 };
@@ -38,7 +38,7 @@ void ListIterator<T>::next(void)
 };
 
 template <typename T>
-bool ListIterator<T>::is_invalid() const
+bool ListIterator<T>::is_invalid(void) const
 {
     return this->ptr.lock() == nullptr;
 };
@@ -87,12 +87,12 @@ const T &ListIterator<T>::operator*() const
         time_t cur_time = time(NULL);
         throw InvalidPointer(ctime(&cur_time), __FILE__, typeid(*this).name(), __LINE__);
     }
-
+    
     return this->ptr.lock()->get();
 };
 
 template <typename T>
-ListIterator<T>::operator bool() const
+ListIterator<T>::operator bool() const noexcept
 {   
     return this->ptr.lock() != nullptr;
 };
